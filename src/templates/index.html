@@ -1,0 +1,53 @@
+<!-- Realizado por Juliana Castillo Araujo -->
+<!-- Parcial 2  -->
+<!-- 19 de abril 2024 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina web</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <h1>Bienvenido a empresa de suministro de equipos de computo</h1>
+    <br>
+    <h1>Este programa fue disenado por Juliana Castillo Araujo</h1>
+    <h2>Aqui podras guardar tus productos de computo, editarlos y enviarlos a nuestra base de datos creado en MongoDB</h2>
+    <br>
+    <h3>Guardar los productos</h3>
+    <form action="/guardar_productos" method="post">
+        <p>Nombre del producto:</p>
+        <input type="text" name="nombre_producto">
+        <br>
+        <p>Valor del producto:</p>
+        <input type="text" name="valor_producto">
+        <br>
+        <p>Cantidad del producto:</p>
+        <input type="text" name="cantidad_producto">
+        <br>
+        <p>Email:</p>
+        <input type="text" name="email">
+        <br>
+        <p>Contraseña:</p>
+        <input type="text" name="password">
+        <br>
+        <br>
+        <button type="submit">Guardar</button>
+    </form>   
+    <h3>Productos que ya se registraron</h3>
+    {% for productos in productos %}
+    <form action="/editar_productos/{{productos.nombre_producto}}" method="post">
+    <input type="text" name="nombre_producto"   value="{{productos.nombre_producto}}">
+    <input type="text" name="valor_producto" value="{{productos.valor_producto}}">
+    <input type="text" name="cantidad_producto" value="{{productos.cantidad_producto}}">
+    <input type="text" name="email" value="{{productos.email}}">
+    <input type="text" name="password" value="{{productos.password}}">
+    <button type="submit">Actualizar</button>
+    <hr>
+    <button type="submit">Actualizar </button>
+    <a href ="{{url_for('eliminar',nombre_producto= productos.nombre_producto)}}" onclick="return confirm('¿Esta seguro de eliminar este documento?')"> Eliminar</a>
+    </form> 
+    {% endfor %}
+</body>
+</html>
